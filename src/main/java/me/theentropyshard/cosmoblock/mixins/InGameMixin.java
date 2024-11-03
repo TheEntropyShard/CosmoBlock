@@ -49,7 +49,7 @@ public class InGameMixin extends GameState {
             GameState.batch,
             super.uiViewport,
             phaseText,
-            (float) super.uiViewport.getScreenWidth() / 2 - textDim.x,
+            (float) super.uiViewport.getWorldWidth() / 2 - textDim.x,
             0 - textDim.y / 2
         );
 
@@ -57,7 +57,7 @@ public class InGameMixin extends GameState {
             GameState.batch,
             super.uiViewport,
             CosmoBlockMod.stats,
-            (float) super.uiViewport.getScreenWidth() / 2 - textDim.x,
+            (float) super.uiViewport.getWorldWidth() / 2 - textDim.x,
             textDim.y
         );
 

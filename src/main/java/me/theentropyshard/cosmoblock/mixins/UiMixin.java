@@ -38,7 +38,7 @@ public class UiMixin {
 
         Vector2 textDim = new Vector2();
         FontRenderer.getTextDimensions(this.uiViewport, CosmoBlockMod.stats, textDim);
-        float textX = (float) this.uiViewport.getScreenWidth() / 2 - textDim.x;
+        float textX = this.uiViewport.getWorldWidth() / 2 - textDim.x;
         float textY = 0 - textDim.y / 2;
 
         Gdx.gl.glEnable(3042);
