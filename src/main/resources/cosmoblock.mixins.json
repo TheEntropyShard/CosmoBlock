@@ -4,6 +4,8 @@
     "package": "me.theentropyshard.cosmoblock.mixins",
     "compatibilityLevel": "JAVA_17",
     "mixins": [
+        "ProgressLoadMixin",
+        "ProgressSaveMixin",
         "ClientBlockEventsMixin",
         "InGameMixin",
         "ItemCatalogMixin",

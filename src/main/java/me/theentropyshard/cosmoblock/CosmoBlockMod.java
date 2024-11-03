@@ -90,6 +90,18 @@ public class CosmoBlockMod implements ModInitializer {
         CosmoBlockMod.updateStats();
     }
 
+    public static Phase getPhaseByName(String phaseName) {
+        for (Phase phase : CosmoBlockMod.phases.values()) {
+            if (phase.getName().equals(phaseName)) {
+                return phase;
+            }
+        }
+
+        CosmoBlockMod.LOGGER.warn("Could not find phase with name '" + phaseName + "' (actually null: " + (phaseName == null) + ")");
+
+        return null;
+    }
+
     @Override
     public void onInitialize(ModContainer mod) {
         CosmoBlockMod.LOGGER.info("CosmoBlock initialized!");
