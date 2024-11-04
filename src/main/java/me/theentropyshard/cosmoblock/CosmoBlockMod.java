@@ -29,65 +29,123 @@ public class CosmoBlockMod implements ModInitializer {
 
     public static String stats;
 
+    private static int phaseCounter;
     public static final Map<Integer, Phase> phases = new HashMap<>();
 
     static {
-        CosmoBlockMod.phases.put(0, new Phase("Forest", 0, 450, List.of(
-            Block.DIRT,
-            Block.GRASS,
-            Block.TREELOG,
-            Block.getInstance("base:leaves_poplar")
-        )));
+        CosmoBlockMod.addPhase(
+            Phase.newBuilder()
+                .name("Forest")
+                .totalBlocks(250)
+                .possibleBlocks(
+                    Block.DIRT,
+                    Block.GRASS,
+                    Block.TREELOG,
+                    Block.getInstance("base:leaves_poplar")
+                )
+                .build()
+        );
 
-        CosmoBlockMod.phases.put(1, new Phase("Beach", 1, 1000, List.of(
-            Block.SAND,
-            Block.TREELOG,
-            Block.COCONUT,
-            Block.getInstance("base:leaves"),
-            Block.getInstance("base:stone_gravel")
-        )));
+        CosmoBlockMod.addPhase(
+            Phase.newBuilder()
+                .name("Mountains")
+                .totalBlocks(550)
+                .possibleBlocks(
+                    Block.DIRT,
+                    Block.GRASS,
+                    Block.TREELOG,
+                    Block.SNOW,
+                    Block.getInstance("base:leaves_poplar"),
+                    Block.getInstance("base:stone_gabbro")
+                )
+                .build()
+        );
 
-        CosmoBlockMod.phases.put(2, new Phase("Cave", 2, 1900, List.of(
-            Block.DIRT,
-            Block.STONE_BASALT,
-            Block.getInstance("base:stone_gabbro"),
-            Block.getInstance("base:stone_limestone"),
-            Block.getInstance("base:stone_gravel"),
-            Block.getInstance("base:magma"),
-            Block.getInstance("base:stone_gabbro"),
-            Block.getInstance("base:ore_bauxite"),
-            Block.getInstance("base:ore_iron"),
-            Block.getInstance("base:ore_gold")
-        )));
+        CosmoBlockMod.addPhase(
+            Phase.newBuilder()
+                .name("Beach")
+                .totalBlocks(1000)
+                .possibleBlocks(
+                    Block.SAND,
+                    Block.TREELOG,
+                    Block.COCONUT,
+                    Block.getInstance("base:leaves"),
+                    Block.getInstance("base:stone_gravel")
+                )
+                .build()
+        );
 
-        CosmoBlockMod.phases.put(3, new Phase("Winter", 3, 3100, List.of(
-            Block.SNOW,
-            Block.DIRT
-        )));
+        CosmoBlockMod.addPhase(
+            Phase.newBuilder()
+                .name("Cave")
+                .totalBlocks(1900)
+                .possibleBlocks(
+                    Block.DIRT,
+                    Block.STONE_BASALT,
+                    Block.getInstance("base:stone_gabbro"),
+                    Block.getInstance("base:stone_limestone"),
+                    Block.getInstance("base:stone_gravel"),
+                    Block.getInstance("base:magma"),
+                    Block.getInstance("base:stone_gabbro"),
+                    Block.getInstance("base:ore_bauxite"),
+                    Block.getInstance("base:ore_iron"),
+                    Block.getInstance("base:ore_gold")
+                )
+                .build()
+        );
 
-        CosmoBlockMod.phases.put(4, new Phase("Moon", 4, 5000, List.of(
-            Block.STONE_BASALT,
-            Block.LUNAR_SOIL
-        )));
+        CosmoBlockMod.addPhase(
+            Phase.newBuilder()
+                .name("Winter")
+                .totalBlocks(3100)
+                .possibleBlocks(
+                    Block.SNOW,
+                    Block.DIRT
+                )
+                .build()
+        );
 
-        CosmoBlockMod.phases.put(5, new Phase("Factory", 5, 8000, List.of(
-            Block.WOODPLANKS,
-            Block.getInstance("base:aluminium_panel"),
-            Block.getInstance("base:asphalt"),
-            Block.getInstance("base:bricks"),
-            Block.getInstance("base:c4"),
-            Block.getInstance("base:crate_wooden"),
-            Block.getInstance("base:furnace"),
-            Block.getInstance("base:glass"),
-            Block.getInstance("base:hazard"),
-            Block.getInstance("base:light"),
-            Block.getInstance("base:light"),
-            Block.getInstance("base:metal_panel")
-        )));
+        CosmoBlockMod.addPhase(
+            Phase.newBuilder()
+                .name("Moon")
+                .totalBlocks(5000)
+                .possibleBlocks(
+                    Block.STONE_BASALT,
+                    Block.LUNAR_SOIL,
+                    Block.getInstance("base:ore_iron")
+                )
+                .build()
+        );
+
+        CosmoBlockMod.addPhase(
+            Phase.newBuilder()
+                .name("Factory")
+                .totalBlocks(8000)
+                .possibleBlocks(
+                    Block.WOODPLANKS,
+                    Block.getInstance("base:aluminium_panel"),
+                    Block.getInstance("base:asphalt"),
+                    Block.getInstance("base:bricks"),
+                    Block.getInstance("base:c4"),
+                    Block.getInstance("base:crate_wooden"),
+                    Block.getInstance("base:furnace"),
+                    Block.getInstance("base:glass"),
+                    Block.getInstance("base:hazard"),
+                    Block.getInstance("base:light"),
+                    Block.getInstance("base:metal_panel")
+                )
+                .build()
+        );
 
         CosmoBlockMod.currentPhase = CosmoBlockMod.phases.get(0);
 
         CosmoBlockMod.updateStats();
+    }
+
+    public static void addPhase(Phase phase) {
+        phase.setNumber(CosmoBlockMod.phaseCounter++);
+
+        CosmoBlockMod.phases.put(phase.getNumber(), phase);
     }
 
     public static Phase getPhaseByName(String phaseName) {
